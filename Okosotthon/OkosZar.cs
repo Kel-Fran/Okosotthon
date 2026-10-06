@@ -1,36 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Okosotthon
+﻿namespace Okosotthon
 {
     public class OkosZar: OkosEszkoz
     {
+        public bool ZartE { get; private set; } = true;
+        private string pinKod;
+
         public OkosZar(string azonosito, string nev, string pinKod)
         : base(azonosito, nev)
         {
-            throw new NotImplementedException();
+            this.pinKod = pinKod;
         }
 
         public override void ParancsVegrehajtasa(string parancs)
         {
-            throw new NotImplementedException();
+            var s = parancs.AsSpan();
+            if (s.SequenceEqual("ZARAS")) { ZartE = true; return; }
+            if (s.StartsWith("NYITAS:")) {
+                var pin = s.Slice(s.IndexOf(':') + 1);
+                if (pin.SequenceEqual(pinKod)) ZartE = false;
+            }
         }
 
 
         public override string AllapotJelentes()
         {
-            throw new NotImplementedException();
+            return ZartE.ToString();
         }
 
         protected override bool OnTesztFuttatasa()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public override void GyariBeallitasokVisszaallitasa()
         {
-            throw new NotImplementedException();
+            base.GyariBeallitasokVisszaallitasa();
+            pinKod = "0000";
+            ZartE = true;
         }
 
 
