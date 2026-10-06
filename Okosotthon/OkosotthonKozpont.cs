@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Okosotthon
+﻿namespace Okosotthon
 {
     public class OkosotthonKozpont
     {
+        private readonly List<OkosEszkoz> eszkozok = [];
+
         public void EszkozHozzaadasa(OkosEszkoz eszkoz)
         {
-            throw new NotImplementedException();
+            eszkozok.Add(eszkoz);
         }
 
      
         public void OsszesCsatlakoztatasa()
         {
-            throw new NotImplementedException();
+            eszkozok.ForEach(it => it.Csatlakozas());
         }
 
         public int RendszerDiagnosztikaFuttatasa()
         {
-            throw new NotImplementedException();
+            return eszkozok.Aggregate(0, (acc, r) => r.DiagnosztikaFuttatasa() ? acc + 1 : acc);
         }
 
     }
