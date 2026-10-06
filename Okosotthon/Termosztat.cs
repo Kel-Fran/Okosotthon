@@ -1,30 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Okosotthon
+﻿namespace Okosotthon
 {
     public class Termosztat : OkosEszkoz
     {
+        public double JelenlegiHomerseklet { get; private set; } = 21;
+        public double CelHomerseklet { get; private set; }
+
         public Termosztat(string azonosito, string nev, double celHomerseklet)
         : base(azonosito, nev)
         {
-            throw new NotImplementedException();
+            CelHomerseklet = celHomerseklet;
         }
 
         public override void ParancsVegrehajtasa(string parancs)
         {
-            throw new NotImplementedException();
+            const string COMMAND = "BEALLIT_HOMERSEKLET:";
+            if (!parancs.StartsWith(COMMAND)) return;
+            var arg = parancs.AsSpan().Slice(parancs.IndexOf(':') + 1);
+            if (double.TryParse(arg, System.Globalization.CultureInfo.InvariantCulture, out var v)) CelHomerseklet = v;
         }
 
         public override string AllapotJelentes()
         {
-            throw new NotImplementedException();
+            return $"{JelenlegiHomerseklet}, {CelHomerseklet}";
         }
 
         protected override bool OnTesztFuttatasa()
         {
-            throw new NotImplementedException();
+            return CelHomerseklet > 5 && CelHomerseklet < 35;
         }
 
     }
