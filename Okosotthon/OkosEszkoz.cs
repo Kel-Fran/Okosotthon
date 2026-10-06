@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Okosotthon
+﻿namespace Okosotthon
 {
     public abstract class OkosEszkoz
     {
@@ -11,32 +7,39 @@ namespace Okosotthon
         private bool onlineE;
         private DateTime utolsoFrissites;
 
+        public string Azonosito { get => azonosito; private set => azonosito = value; }
+        public string Nev { get => nev; private set => nev = value; }
+        public bool OnlineE { get => onlineE; private set => onlineE = value; }
+        public DateTime UtolsoFrissites { get => utolsoFrissites; protected set => utolsoFrissites = value; }
 
         public OkosEszkoz(string azonosito, string nev)
         {
 
-            throw new NotImplementedException();
+            this.azonosito = azonosito;
+            this.nev = nev;
+            OnlineE = false;
+            UtolsoFrissites = DateTime.Now;
         }
 
 
         public void Csatlakozas()
         {
-            throw new NotImplementedException();
+            OnlineE = true;
         }
 
 
         public void KapcsolatBontasa()
         {
-            throw new NotImplementedException();
+            OnlineE = false;
         }
         public bool DiagnosztikaFuttatasa()
         {
-            throw new NotImplementedException();
+            return OnlineE && OnTesztFuttatasa();
         }
 
         public virtual void GyariBeallitasokVisszaallitasa()
         {
-            throw new NotImplementedException();
+            // noop
         }
 
 
