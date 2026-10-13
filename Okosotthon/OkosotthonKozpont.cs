@@ -20,5 +20,7 @@
             return eszkozok.Aggregate(0, (acc, r) => r.DiagnosztikaFuttatasa() ? acc + 1 : acc);
         }
 
+        public void AlertAll() => eszkozok.ForEach(x => (x as IHangjelzo)?.VeszjelzesInditasa());
+
     }
 }

@@ -1,10 +1,11 @@
 ﻿namespace Okosotthon
 {
-    public class Termosztat : OkosEszkoz
+    public class Termosztat : OkosEszkoz, IIdozitheto, IStatisztika
     {
         public double JelenlegiHomerseklet { get; private set; } = 21;
         public double CelHomerseklet { get; private set; }
 
+        public int MaradtIdo { get; set; }
         public Termosztat(string azonosito, string nev, double celHomerseklet)
         : base(azonosito, nev)
         {
@@ -29,5 +30,14 @@
             return CelHomerseklet > 5 && CelHomerseklet < 35;
         }
 
+        public string StatisztikatKeszit()
+        {
+            return AllapotJelentes();
+        }
+
+        public void IdozitestBeallit(int perc)
+        {
+            MaradtIdo = perc;
+        }
     }
 }

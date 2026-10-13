@@ -1,6 +1,6 @@
 namespace Okosotthon;
 
 public interface IIdozitheto {
-    void IdozitesBeallit(int perc);
+    void IdozitestBeallit(int perc);
     int MaradtIdo { get; }
 }
